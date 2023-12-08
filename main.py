@@ -25,8 +25,9 @@ async def read_item(item_id: int):
     return {"item_id": item_id+3}
 
 @app.post("/uploadfile/")
-async def create_upload_file(file: UploadFile = File(...)):
-    datos = pd.read_excel(file.file, header=7, skipfooter=4)
+async def create_upload_file(file1: UploadFile = File(...)):
+    #, file2: UploadFile = File(...), file3: UploadFile = File(...), file4: UploadFile = File(...)
+    datos = pd.read_excel(file1.file, header=7, skipfooter=4)
     outfile = 'resultados.txt'
     finalFile = open(outfile, 'w')
     finalFile.write(f'Promedio: {datos["Tasa de cambio representativa del mercado (TRM)"].mean()}\n')
